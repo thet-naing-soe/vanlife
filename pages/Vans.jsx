@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useSearchParams, useLoaderData } from "react-router-dom";
-import { getVans } from "../api.js";
+import { getVans } from "../api";
 
 export function loader() {
-  return getVans()
+  return getVans();
 }
 
 export default function Vans() {

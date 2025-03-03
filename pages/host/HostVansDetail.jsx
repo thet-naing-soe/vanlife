@@ -1,5 +1,10 @@
 import React from "react";
-import { useParams, Link, Outlet, NavLink } from "react-router-dom";
+import { useParams, Link, Outlet, NavLink, useLoaderData } from "react-router-dom";
+import { getHostVans } from "../../api";
+
+export async function loader({params}) {
+  return getHostVans(params.id);
+}
 
 export default function HostVans() {
   const activeStyles = {
@@ -7,15 +12,8 @@ export default function HostVans() {
     textDecoration: "underline",
     color: "#161616",
   };
-  const { id } = useParams();
-  const [currentVan, setCurrentVan] = React.useState(null);
-  React.useEffect(() => {
-    fetch(`/api/host/vans/${id}`)
-      .then((response) => response.json())
-      .then((data) => setCurrentVan(data.vans));
-  }, []);
+  const currentVan = useLoaderData();
 
-  if (!currentVan) return <h2>Loading...</h2>;
   return (
     <section>
       <Link to=".." relative="path" className="back-button">

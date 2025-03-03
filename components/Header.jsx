@@ -15,21 +15,27 @@ export default function Header() {
       <nav>
         <NavLink
           style={({ isActive }) => (isActive ? activeStyles : null)}
-          to="/host"
+          to="host"
         >
           Host
         </NavLink>
         <NavLink
           style={({ isActive }) => (isActive ? activeStyles : null)}
-          to="/about"
+          to="about"
         >
           About
         </NavLink>
         <NavLink
           style={({ isActive }) => (isActive ? activeStyles : null)}
-          to="/vans"
+          to="vans"
         >
           Vans
+        </NavLink>
+        <NavLink className="login-link" to="login">
+          <img
+            src="../assets/images/avatar-icon.png"
+            className="login-icon"
+          />
         </NavLink>
       </nav>
     </header>

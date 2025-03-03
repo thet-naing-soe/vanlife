@@ -9,6 +9,7 @@ import {
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Vans, { loader as vansLoader } from "./pages/Vans";
+import Login from "./pages/Login";
 import VanDetail from "./pages/VanDetail";
 import Dashboard from "./pages/host/Dashboard";
 import Income from "./pages/host/Income";
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="about" element={<About />} />
+      <Route path="login" element={<Login />} />
       <Route
         path="vans"
         element={<Vans />}

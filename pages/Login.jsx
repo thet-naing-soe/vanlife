@@ -1,14 +1,16 @@
 import React from "react";
-import { useLoaderData, useNavigate, redirect,Form } from "react-router-dom";
+import { useLoaderData, useNavigate, redirect, Form } from "react-router-dom";
 import { loginUser } from "../api";
 
 export async function loader({ request }) {
   return new URL(request.url).searchParams.get("message");
 }
 
-export async function action(obj) {
-  console.log(obj);
-  console.log("Action function");
+export async function action({ request }) {
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const password = formData.get("password");
+  console.log(email, password);
   return null;
 }
 

@@ -1,6 +1,10 @@
 import React from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLoaderData } from "react-router-dom";
 import { getVans } from "../api.js";
+
+export function loader() {
+  return getVans()
+}
 
 export default function Vans() {
   const [vans, setVans] = React.useState([]);
@@ -8,6 +12,9 @@ export default function Vans() {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const typeFilter = searchParams.get("type");
+
+  const data = useLoaderData()
+  console.log(data)
 
   React.useEffect(() => {
     async function loadVans() {

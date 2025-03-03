@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData, useSearchParams } from "react-router-dom";
+import { useLoaderData, useNavigate, redirect } from "react-router-dom";
 import { loginUser } from "../api";
 
 export function loader({ request }) {
@@ -7,19 +7,23 @@ export function loader({ request }) {
 }
 
 export default function Login() {
-  const message = useLoaderData();
-  const [status, setStatus] = React.useState("idle");
-  const [error, setError] = React.useState(null);
   const [loginFormData, setLoginFormData] = React.useState({
     email: "",
     password: "",
   });
+  const [status, setStatus] = React.useState("idle");
+  const [error, setError] = React.useState(null);
+  const message = useLoaderData();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
     setStatus("submitting");
+    setError(null);
     loginUser(loginFormData)
-      .then((data) => console.log(data))
+      .then((data) => {
+        navigate("/host", { replace: true });
+      })
       .catch((err) => setError(err))
       .finally(() => setStatus("idle"));
   }
@@ -35,7 +39,6 @@ export default function Login() {
   return (
     <div className="login-container">
       <h1>Sign in to your account</h1>
-
       {message && <h3 className="red">{message}</h3>}
       {error && <h3 className="red">{error.message}</h3>}
 
@@ -54,7 +57,9 @@ export default function Login() {
           placeholder="Password"
           value={loginFormData.password}
         />
-        <button>{status === "submitting" ? "Logging in..." : "Log in"}</button>
+        <button disabled={status === "submitting"}>
+          {status === "submitting" ? "Logging in..." : "Log in"}
+        </button>
       </form>
     </div>
   );

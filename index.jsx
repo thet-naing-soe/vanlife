@@ -1,15 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {RouterProvider, createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Vans, {loader as vansLoader} from "./pages/Vans";
+import Vans, { loader as vansLoader } from "./pages/Vans";
 import VanDetail from "./pages/VanDetail";
 import Dashboard from "./pages/host/Dashboard";
 import Income from "./pages/host/Income";
 import Reviews from "./pages/host/Reviews";
 import Layout from "./components/Layout";
 import HostLayout from "./components/HostLayout";
+import Error from "./components/Error";
 import HostVans from "./pages/host/HostVans";
 import HostVansDetail from "./pages/host/HostVansDetail";
 import HostVansInfo from "./pages/host/HostVansInfo";
@@ -24,7 +30,12 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="about" element={<About />} />
-      <Route path="vans" element={<Vans />} loader={vansLoader} />
+      <Route
+        path="vans"
+        element={<Vans />}
+        errorElement={<Error />}
+        loader={vansLoader}
+      />
       <Route path="vans/:id" element={<VanDetail />} />
 
       <Route path="host" element={<HostLayout />}>

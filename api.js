@@ -34,7 +34,7 @@ export async function loginUser(creds) {
   const data = await res.json();
   if (!res.ok) {
     throw {
-      message: "Failed to fetch vans",
+      message: data.message,
       statusText: res.statusText,
       status: res.status,
     };

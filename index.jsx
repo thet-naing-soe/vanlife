@@ -14,7 +14,7 @@ import Login, {
   action as loginAction,
 } from "./pages/Login";
 import VanDetail, { loader as VanDetailLoader } from "./pages/VanDetail";
-import Dashboard from "./pages/host/Dashboard";
+import Dashboard, {loader as dashboardLoader} from "./pages/host/Dashboard";
 import Income from "./pages/host/Income";
 import Reviews from "./pages/host/Reviews";
 import Layout from "./components/Layout";
@@ -56,7 +56,7 @@ const router = createBrowserRouter(
           index
           element={<Dashboard />}
           errorElement={<Error />}
-          loader={async ({ request }) => await requireAuth(request)}
+          loader={dashboardLoader}
         />
         <Route
           path="income"
